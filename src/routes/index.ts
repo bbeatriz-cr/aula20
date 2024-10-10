@@ -3,14 +3,22 @@ import { Router, Request, Response, RequestHandler } from 'express';
 const router = Router()
 
 router.get('/', (req: Request, res: Response) => {
-    res.send("Página home")
+    //let user: string = 'Beatriz'
+    let user = {
+        nome: 'Beatriz',
+        idade: 19
+    }
+
+    res.render('home',{
+        user
+    })
 })
 
 //quando usamos middleware, usamos NEXT
 const interferir: RequestHandler = (req,res,next) =>{
     //console.log("PASSOU PELO MIDDLEWARE")
     //next significa que liberamos o middleware a pag d. contatos
-    let logged = false
+    let logged = true
     if(logged){
         next()
     }else{
@@ -20,10 +28,10 @@ const interferir: RequestHandler = (req,res,next) =>{
 
 router.get('/contatos',interferir, (req: Request, res: Response) => {
     //console.log("Executou a pagina de CONTATOS")
-    res.send("Página contatos")
+    res.render('contatos')
 })
 router.get('/sobre', (req: Request, res: Response) => {
-    res.send("Página sobre")
+    res.render('sobre')
 })
 
 
