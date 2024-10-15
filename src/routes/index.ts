@@ -4,15 +4,41 @@ const router = Router()
 
 router.get('/', (req: Request, res: Response) => {
     //let user: string = 'Beatriz'
-    let user = {
+    /*let user = {
         nome: 'Beatriz',
         idade: 19
+    }*/
+    let idade: number = 15
+    let mostrarIdade: boolean = false
+
+    if(idade >= 18){
+        mostrarIdade = true
     }
+    
 
     res.render('home',{
-        user
+        nome: 'Fulano',   
+        sobreNome: 'de Tal',
+        aparecerMensagem: true,
+        mostrarIdade,
+        idade,
+        produtos:[
+            {titulo:'mesa',preco: 200},
+            {titulo:'xampu',preco: 15},
+            {titulo:'cadeira',preco: 50}
+        ],
+        frases:[
+            'Só sei que nada sei',
+            'A vingaça nunca é plena, mata a alma e envenena',
+            'Maldito seja o homem que confia no homem',
+            'Eu odeio você, Maria Joaquina'
+        ]
+
     })
+    
 })
+
+
 
 //quando usamos middleware, usamos NEXT
 const interferir: RequestHandler = (req,res,next) =>{

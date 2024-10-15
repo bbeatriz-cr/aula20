@@ -1,10 +1,38 @@
-<title> Aqui é meu site</title>
-
-<header>
-    <h1>Titulo do site</h1>
-</header>
-
+{{>partials/header}}
+<body>
 <section>
     <p>Aqui é o conteudo do site</p>
-    <p>Oi {{user.nome}}, você tem {{user.idade}} anos?</p>
+    {{#aparecerMensagem}}
+        <p>Oi {{nome}} {{sobreNome}} seja bem vindo!</p>
+    {{/aparecerMensagem}}
+
+    {{#mostrarIdade}}
+        <p> opa, voce tem {{idade}} anos, e é maior de idade</p>
+    {{/mostrarIdade}}
+
+    {{^mostrarIdade}}
+        <p> opa, voce tem {{idade}} anos, e é menor de idade</p>
+    {{/mostrarIdade}}
+    
+
+    {{#produtos}}
+        <ul>
+            <li>{{titulo}} - R$ {{preco}}</li>
+        </ul>
+    {{/produtos}}
+
+    <hr>
+
+    <ul>
+        {{#frases}}
+        <li>{{.}}</li>
+        {{/frases}}
+    </ul>
+
+    <!-- Caso não tenha nada escrito lá em frases no Index, irá aparecer essa frase do ^frases-->
+    {{^frases}}
+        Não temos frases motivacionais hoje
+    {{/frases}}
 </section>
+</body>
+{{>partials/footer}}
